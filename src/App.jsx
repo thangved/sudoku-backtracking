@@ -6,7 +6,6 @@ import { EMPTY, NUM_COLS, NUM_ROWS } from './constants';
 import createBoard from './utils/createBoard';
 import createConstraints from './utils/createConstraints';
 import getAvailableValues from './utils/getAvailableValues';
-import getIndex from './utils/getIndex';
 import getNextMinDomainCell from './utils/getNextMinDomainCell';
 import isFilled from './utils/isFilled';
 
@@ -18,6 +17,7 @@ function App() {
 	const [availableValues, setAvailableValues] = useState([]);
 	const [steps, setSteps] = useState([]);
 	const [backtracking, setBacktracking] = useState(false);
+	const [speed, setSpeed] = useState(900);
 
 	useEffect(() => {
 		if (!availableValues.length || !stack.length) {
@@ -35,7 +35,7 @@ function App() {
 			return;
 		}
 
-		const available = availableValues[0].join(', ')
+		const available = availableValues[0].join(', ');
 
 		setSteps((prev) => [
 			`Bước ${steps.length + 1}: Xét (${currentPosition.x}, ${
@@ -65,7 +65,7 @@ function App() {
 			return;
 		}
 
-		setTimeout(() => {
+		const timeout = setTimeout(() => {
 			const pos = getNextMinDomainCell(board, constraints);
 
 			if (typeof pos.x === 'undefined' || backtracking) {
@@ -112,7 +112,9 @@ function App() {
 				getAvailableValues(pos, board, constraints),
 				...prev,
 			]);
-		}, 100);
+		}, 1000 - speed);
+
+		return () => clearTimeout(timeout);
 	}, [board]);
 
 	const handleSolve = () => {
@@ -127,6 +129,13 @@ function App() {
 			getAvailableValues(pos, board, constraints),
 			...prev,
 		]);
+	};
+
+	const handleReset = () => {
+		setBoard(createBoard());
+		setCurrentPosition({});
+		setStack([]);
+		setAvailableValues([]);
 	};
 
 	return (
@@ -156,6 +165,20 @@ function App() {
 					))}
 				</ul>
 				<button onClick={handleSolve}>Solve</button>
+				<button onClick={handleReset}>Reset</button>
+				<br />
+				<br />
+				<label htmlFor='speed'>Speed</label>{' '}
+				<input
+					type='range'
+					name=''
+					id='speed'
+					min={100}
+					max={1000}
+					value={speed}
+					onChange={(event) => setSpeed(parseInt(event.target.value))}
+				/>
+				{speed}
 			</div>
 		</div>
 	);
