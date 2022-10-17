@@ -35,10 +35,12 @@ function App() {
 			return;
 		}
 
+		const available = availableValues[0].join(', ')
+
 		setSteps((prev) => [
 			`Bước ${steps.length + 1}: Xét (${currentPosition.x}, ${
 				currentPosition.y
-			}): ${value}`,
+			}): ${value} trong [${available}]`,
 			...prev,
 		]);
 
