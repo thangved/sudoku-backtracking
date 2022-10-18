@@ -26,6 +26,10 @@ function App() {
 		}
 
 		if (isFilled(board)) {
+			setSteps((prev) => [
+				'<span class="success">Thành công!!</span>',
+				...prev,
+			]);
 			return;
 		}
 
