@@ -11,6 +11,7 @@ import isFilled from './utils/isFilled';
 
 function App() {
 	const [board, setBoard] = useState(createBoard());
+	const [fixedBoard, setFixedBoard] = useState(createBoard());
 	const constraints = useRef(createConstraints()).current;
 	const [currentPosition, setCurrentPosition] = useState({});
 	const [stack, setStack] = useState([]);
@@ -35,6 +36,8 @@ function App() {
 			return;
 		}
 
+		setBacktracking(false);
+
 		const available = availableValues[0].join(', ');
 
 		setSteps((prev) => [
@@ -47,12 +50,6 @@ function App() {
 		setBoard((prev) => {
 			prev[stack[0].x][stack[0].y] = value;
 			return [...prev];
-		});
-
-		setAvailableValues((prev) => {
-			prev[0] = prev[0].slice(1);
-
-			return prev;
 		});
 	}, [stack]);
 
@@ -68,8 +65,8 @@ function App() {
 		const timeout = setTimeout(() => {
 			const pos = getNextMinDomainCell(board, constraints);
 
-			if (typeof pos.x === 'undefined' || backtracking) {
-				if (availableValues[0].length) {
+			if (!pos || backtracking) {
+				if (availableValues[0].length > 1) {
 					setBacktracking(false);
 					setStack((prev) => [...prev]);
 					return;
@@ -99,7 +96,13 @@ function App() {
 
 				setCurrentPosition(stack[1]);
 				setStack((prev) => [...prev.slice(1)]);
-				setAvailableValues((prev) => [...prev.slice(1)]);
+				setAvailableValues((prev) => {
+					prev = prev.slice(1);
+
+					prev[0] = prev[0].slice(1);
+
+					return prev;
+				});
 
 				return;
 			}
@@ -123,7 +126,7 @@ function App() {
 
 	const handleSolve = () => {
 		const pos = getNextMinDomainCell(board, constraints);
-		if (typeof pos.x === 'undefined') {
+		if (!pos) {
 			return;
 		}
 
@@ -136,7 +139,17 @@ function App() {
 	};
 
 	const handleReset = () => {
-		setBoard(createBoard());
+		const board = createBoard();
+
+		const __board = [];
+
+		for (const row of board) {
+			__board.push([...row]);
+		}
+
+		setFixedBoard(__board);
+
+		setBoard(board);
 		setCurrentPosition({});
 		setStack([]);
 		setAvailableValues([]);
@@ -150,6 +163,7 @@ function App() {
 					<GameBoard
 						board={board}
 						constraints={constraints}
+						fixedBoard={fixedBoard}
 						current={currentPosition}
 					/>
 				</div>

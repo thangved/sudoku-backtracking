@@ -46,6 +46,10 @@ td {
 	vertical-align: middle;
 	user-select: none;
 }
+.fixed {
+	font-weight: bold;
+	background: #00000010;
+}
 
 .constraints {
 	background: #ffa1a1;

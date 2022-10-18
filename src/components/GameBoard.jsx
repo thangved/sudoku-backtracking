@@ -4,7 +4,12 @@ import React from 'react';
 import { EMPTY, NUM_COLS, SQUARE_SIZE } from '../constants';
 import getIndex from '../utils/getIndex';
 
-const GameBoard = ({ board = [[]], current, constraints }) => {
+const GameBoard = ({
+	board = [[]],
+	fixedBoard = [[]],
+	current,
+	constraints,
+}) => {
 	return (
 		<div className='game'>
 			<table>
@@ -24,6 +29,7 @@ const GameBoard = ({ board = [[]], current, constraints }) => {
 													y: colIndex,
 												})
 											][getIndex(current)],
+										fixed: fixedBoard[rowIndex][colIndex],
 									})}
 									style={{
 										borderRight:

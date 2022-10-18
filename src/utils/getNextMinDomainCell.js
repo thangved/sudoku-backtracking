@@ -2,7 +2,7 @@ import { EMPTY, NUM_COLS, NUM_ROWS } from '../constants';
 import getAvailableValues from './getAvailableValues';
 
 export default function getNextMinDomainCell(board, constraints) {
-	let pos = {};
+	let pos = null;
 	let minLength = Infinity;
 
 	for (let x = 0; x < NUM_ROWS; x++) {
@@ -15,7 +15,7 @@ export default function getNextMinDomainCell(board, constraints) {
 				).length;
 
 				if (!length) {
-					return {};
+					return null;
 				}
 
 				if (length && length < minLength) {
