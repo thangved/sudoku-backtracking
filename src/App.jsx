@@ -117,6 +117,10 @@ function App() {
 		return () => clearTimeout(timeout);
 	}, [board]);
 
+	useEffect(() => {
+		handleReset();
+	}, []);
+
 	const handleSolve = () => {
 		const pos = getNextMinDomainCell(board, constraints);
 		if (typeof pos.x === 'undefined') {
@@ -136,6 +140,7 @@ function App() {
 		setCurrentPosition({});
 		setStack([]);
 		setAvailableValues([]);
+		setSteps([]);
 	};
 
 	return (

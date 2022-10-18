@@ -14,6 +14,10 @@ export default function getNextMinDomainCell(board, constraints) {
 					constraints,
 				).length;
 
+				if (!length) {
+					return {};
+				}
+
 				if (length && length < minLength) {
 					minLength = length;
 					pos = { x, y };
