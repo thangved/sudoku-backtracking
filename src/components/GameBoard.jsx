@@ -10,6 +10,7 @@ const GameBoard = ({
 	constraints,
 	backtracking,
 	setFixedBoard,
+	stack,
 }) => {
 	return (
 		<div
@@ -31,6 +32,7 @@ const GameBoard = ({
 									col={col}
 									key={colIndex}
 									setFixedBoard={setFixedBoard}
+									stack={stack}
 								/>
 							))}
 						</tr>

@@ -28,7 +28,7 @@ function App() {
 		if (isFilled(board)) {
 			setSteps((prev) => [
 				...prev,
-				'<span class="success">Thành công!!</span>',
+				<li className='success'>Thành công!!</li>,
 			]);
 			return;
 		}
@@ -67,7 +67,7 @@ function App() {
 			setCurrentPosition({});
 			setSteps((prev) => [
 				...prev,
-				<li class='success'>Thành công!!</li>,
+				<li className='success'>Thành công!!</li>,
 			]);
 			return;
 		}
@@ -104,6 +104,7 @@ function App() {
 				});
 
 				setCurrentPosition(stack[1]);
+
 				setStack((prev) => [...prev.slice(1)]);
 				setAvailableValues((prev) => {
 					prev = prev.slice(1);
@@ -179,6 +180,7 @@ function App() {
 						current={currentPosition}
 						backtracking={backtracking}
 						setFixedBoard={setFixedBoard}
+						stack={stack}
 					/>
 				</div>
 			</div>

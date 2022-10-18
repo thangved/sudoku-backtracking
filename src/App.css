@@ -83,17 +83,43 @@ td input {
 	font-size: 16px;
 }
 
+.marked {
+	background: #ff800190;
+	color: #ffffff;
+}
+
 .fixed {
 	font-weight: bold;
 	background: #00000010;
 }
 
 .constraints {
-	background: #ffff8790;
+	background: #ff800140;
+	color: #ff8000;
 }
 
 .highlight {
+	background: #000;
+	color: #fff;
+	font-weight: bold;
+}
+
+.marked.constraints {
 	background: #ff8000;
+	color: #fff;
+}
+
+.game.backtracking .constraints {
+	background: #001a6840;
+	color: #001a68;
+}
+
+.game.backtracking .marked {
+	background: #001a6890;
+}
+
+.game.backtracking .marked.constraints {
+	background: #001a68;
 	color: #fff;
 }
 
@@ -116,16 +142,6 @@ button:active {
 		min-width: 450px;
 		margin: 10px;
 	}
-}
-
-.game.backtracking .highlight {
-	background: #001a68;
-	color: #fff;
-	border-color: #000;
-}
-
-.game.backtracking .constraints {
-	background: #db93f5;
 }
 
 @keyframes li {

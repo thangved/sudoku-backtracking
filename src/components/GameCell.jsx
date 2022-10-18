@@ -13,6 +13,7 @@ const GameCell = ({
 	fixedBoard,
 	col,
 	setFixedBoard,
+	stack,
 }) => {
 	const [editing, setEditing] = useState(false);
 
@@ -62,6 +63,9 @@ const GameCell = ({
 						})
 					][getIndex(current)],
 				fixed: fixedBoard[rowIndex][colIndex],
+				marked: stack.some(
+					(pos) => pos.x === rowIndex && pos.y === colIndex,
+				),
 			})}
 			style={{
 				borderRight:
