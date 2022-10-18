@@ -85,7 +85,6 @@ td input {
 
 .marked {
 	background: #ff800190;
-	color: #ffffff;
 }
 
 .fixed {
@@ -116,6 +115,7 @@ td input {
 
 .game.backtracking .marked {
 	background: #001a6890;
+	color: #fff;
 }
 
 .game.backtracking .marked.constraints {
