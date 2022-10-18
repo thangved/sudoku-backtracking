@@ -150,6 +150,7 @@ button:active {
 	width: 450px;
 	height: 450px;
 	border: 1px solid #001a68;
+	border-left: none;
 	right: 10px;
 	top: 10px;
 	bottom: 10px;
