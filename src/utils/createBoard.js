@@ -24,7 +24,10 @@ export default function createBoard() {
 		const row = [];
 
 		for (let j = 0; j < NUM_COLS; j++) {
-			row.push(puzzle[index] !== null ? puzzle[index] + 1 : EMPTY);
+			row.push(
+				// puzzle[index] !== null ? puzzle[index] + 1 :
+				EMPTY,
+			);
 			index++;
 		}
 
