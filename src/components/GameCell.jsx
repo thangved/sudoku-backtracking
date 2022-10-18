@@ -35,7 +35,7 @@ const GameCell = ({
 
 		const values = getAvailableValues(pos, fixedBoard, constraints);
 
-		if (!values.includes(value)) {
+		if (!values.includes(value) && value !== EMPTY) {
 			return;
 		}
 
