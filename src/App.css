@@ -30,11 +30,18 @@ ul li {
 	border-radius: 2px;
 }
 
-.danger {
+.danger,
+.success {
 	color: #fff;
 	background: #ff0303;
 	font-weight: bold;
-	padding: 2px;
+	padding: 5px;
+	border-radius: 2px;
+	margin-right: 10px;
+}
+
+.success {
+	background: #54ac54;
 }
 
 table {

@@ -60,6 +60,10 @@ function App() {
 
 		if (isFilled(board)) {
 			setCurrentPosition({});
+			setSteps((prev) => [
+				'<span class="success">Thành công!!</span>',
+				...prev,
+			]);
 			return;
 		}
 
