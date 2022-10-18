@@ -13,7 +13,10 @@
 
 .col {
 	padding: 10px;
-	flex: 1 1;
+}
+
+.col:nth-child(2) {
+	flex: 1;
 }
 
 .game {

@@ -59,6 +59,7 @@ function App() {
 		}
 
 		if (isFilled(board)) {
+			setCurrentPosition({});
 			return;
 		}
 
@@ -172,7 +173,8 @@ function App() {
 				<ul
 					style={{
 						height: NUM_ROWS * 50,
-						width: NUM_COLS * 50,
+						width: '100%',
+						minWidth: NUM_COLS * 50,
 						overflowY: 'scroll',
 					}}
 				>
