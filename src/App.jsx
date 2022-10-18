@@ -172,30 +172,44 @@ function App() {
 	return (
 		<div className='row'>
 			<div className='col'>
-				<div className='col'>
-					<GameBoard
-						board={board}
-						constraints={constraints}
-						fixedBoard={fixedBoard}
-						current={currentPosition}
-						backtracking={backtracking}
-						setFixedBoard={setFixedBoard}
-						stack={stack}
-					/>
-				</div>
+				<GameBoard
+					board={board}
+					constraints={constraints}
+					fixedBoard={fixedBoard}
+					current={currentPosition}
+					backtracking={backtracking}
+					setFixedBoard={setFixedBoard}
+					stack={stack}
+				/>
 			</div>
-			<div className='col steps'>
-				<ul
-					style={{
-						height: NUM_ROWS * 50,
-						width: '100%',
-						overflowY: 'auto',
-					}}
-				>
-					{steps
-						.map((step, i) => React.cloneElement(step, { key: i }))
-						.reverse()}
-				</ul>
+			<div className='col'>
+				<div className='right'>
+					<ul
+						style={{
+							height: NUM_ROWS * 50,
+							width: '100%',
+							overflowY: 'auto',
+						}}
+					>
+						{steps
+							.map((step, i) =>
+								React.cloneElement(step, { key: i }),
+							)
+							.reverse()}
+					</ul>
+
+					<div className='stack'>
+						{stack.map((pos, i) => (
+							<div className='stack-item' key={i}>
+								<span className='pos'>{pos.x}</span>
+								<span className='pos'>{pos.y}</span>
+								<span className='value'>
+									[{availableValues[i].join(', ')}]
+								</span>
+							</div>
+						))}
+					</div>
+				</div>
 				<button onClick={handleSolve}>Solve</button>
 				<button onClick={handleReset}>Reset</button>
 				<br />
