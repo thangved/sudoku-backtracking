@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import './App.css';
 import GameBoard from './components/GameBoard';
-import { EMPTY, NUM_COLS, NUM_ROWS } from './constants';
+import { EMPTY, NUM_ROWS } from './constants';
 import createBoard from './utils/createBoard';
 import createConstraints from './utils/createConstraints';
 import getAvailableValues from './utils/getAvailableValues';
@@ -10,8 +10,8 @@ import getNextMinDomainCell from './utils/getNextMinDomainCell';
 import isFilled from './utils/isFilled';
 
 function App() {
-	const [board, setBoard] = useState(createBoard());
-	const [fixedBoard, setFixedBoard] = useState(createBoard());
+	const [board, setBoard] = useState(createBoard);
+	const [fixedBoard, setFixedBoard] = useState(createBoard);
 	const constraints = useRef(createConstraints()).current;
 	const [currentPosition, setCurrentPosition] = useState({});
 	const [stack, setStack] = useState([]);
@@ -27,8 +27,8 @@ function App() {
 
 		if (isFilled(board)) {
 			setSteps((prev) => [
-				'<span class="success">Thành công!!</span>',
 				...prev,
+				'<span class="success">Thành công!!</span>',
 			]);
 			return;
 		}
@@ -45,10 +45,11 @@ function App() {
 		const available = availableValues[0].join(', ');
 
 		setSteps((prev) => [
-			`Bước ${steps.length + 1}: Xét (${currentPosition.x}, ${
-				currentPosition.y
-			}): ${value} trong [${available}]`,
 			...prev,
+			<li>
+				Bước {steps.length + 1}: Xét ({currentPosition.x},
+				{currentPosition.y}): {value} trong [{available}]
+			</li>,
 		]);
 
 		setBoard((prev) => {
@@ -65,8 +66,8 @@ function App() {
 		if (isFilled(board)) {
 			setCurrentPosition({});
 			setSteps((prev) => [
-				'<span class="success">Thành công!!</span>',
 				...prev,
+				<li class='success'>Thành công!!</li>,
 			]);
 			return;
 		}
@@ -90,12 +91,11 @@ function App() {
 				}
 
 				setSteps((prev) => [
-					`Bước ${
-						steps.length + 1
-					}: <span class="danger">Quay lại</span> (${stack[1].x}, ${
-						stack[1].y
-					})`,
 					...prev,
+					<li className='danger'>
+						Bước {steps.length + 1}: <span>Quay lại</span> (
+						{stack[1].x},{stack[1].y})
+					</li>,
 				]);
 
 				setBoard((prev) => {
@@ -130,6 +130,16 @@ function App() {
 	}, [board]);
 
 	useEffect(() => {
+		const board = [];
+
+		for (const row of fixedBoard) {
+			board.push([...row]);
+		}
+
+		setBoard(board);
+	}, [fixedBoard]);
+
+	useEffect(() => {
 		handleReset();
 	}, []);
 
@@ -150,15 +160,8 @@ function App() {
 	const handleReset = () => {
 		const board = createBoard();
 
-		const __board = [];
+		setFixedBoard(board);
 
-		for (const row of board) {
-			__board.push([...row]);
-		}
-
-		setFixedBoard(__board);
-
-		setBoard(board);
 		setCurrentPosition({});
 		setStack([]);
 		setAvailableValues([]);
@@ -174,24 +177,22 @@ function App() {
 						constraints={constraints}
 						fixedBoard={fixedBoard}
 						current={currentPosition}
+						backtracking={backtracking}
+						setFixedBoard={setFixedBoard}
 					/>
 				</div>
 			</div>
-			<div className='col'>
+			<div className='col steps'>
 				<ul
 					style={{
 						height: NUM_ROWS * 50,
 						width: '100%',
-						minWidth: NUM_COLS * 50,
-						overflowY: 'scroll',
+						overflowY: 'auto',
 					}}
 				>
-					{steps.map((step, i) => (
-						<li
-							key={i}
-							dangerouslySetInnerHTML={{ __html: step }}
-						></li>
-					))}
+					{steps
+						.map((step, i) => React.cloneElement(step, { key: i }))
+						.reverse()}
 				</ul>
 				<button onClick={handleSolve}>Solve</button>
 				<button onClick={handleReset}>Reset</button>
@@ -203,7 +204,7 @@ function App() {
 					name=''
 					id='speed'
 					min={100}
-					max={1000}
+					max={900}
 					value={speed}
 					onChange={(event) => setSpeed(parseInt(event.target.value))}
 				/>

@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	scroll-behavior: smooth;
 }
 
 .row {
@@ -22,26 +23,43 @@
 .game {
 	border: 2px solid #000;
 	width: fit-content;
+	position: relative;
+}
+
+ul {
+	border: 1px solid #001a68;
 }
 
 ul li {
 	padding: 10px;
-	border-bottom: 1px solid #ddd;
-	border-radius: 2px;
+	border-bottom: 1px solid #ff8000;
+	list-style: none;
+	animation: li 0.1s ease;
+	color: #ff8000;
+	background: #ff800010;
 }
 
 .danger,
 .success {
 	color: #fff;
-	background: #ff0303;
+	background: #001a6810;
+	color: #001a68;
 	font-weight: bold;
-	padding: 5px;
+	border-color: #001a68;
+}
+
+.danger span {
+	padding: 5px 10px;
+	background: #001a68;
+	color: #fff;
+	margin: 0 10px;
 	border-radius: 2px;
-	margin-right: 10px;
 }
 
 .success {
-	background: #54ac54;
+	background: #54ac5410;
+	color: #54ac54;
+	border-color: #54ac54;
 }
 
 table {
@@ -55,26 +73,69 @@ td {
 	text-align: center;
 	vertical-align: middle;
 	user-select: none;
+	transition: 0.2s;
 }
+
+td input {
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	font-size: 16px;
+}
+
 .fixed {
 	font-weight: bold;
 	background: #00000010;
 }
 
 .constraints {
-	background: #ffa1a1;
+	background: #ffff8790;
 }
 
 .highlight {
-	background: #ffff87;
+	background: #ff8000;
+	color: #fff;
 }
 
 button {
 	padding: 10px 20px;
-	margin-top: 10px;
+	margin: 10px;
+	cursor: pointer;
+	border: none;
+	background: #000000aa;
+	color: #fff;
+	border-radius: 5px;
 }
 
-button + button {
-	margin-left: 10px;
+button:active {
+	background: #000;
+}
+
+@media (min-width: 450px) {
+	ul {
+		min-width: 450px;
+		margin: 10px;
+	}
+}
+
+.game.backtracking .highlight {
+	background: #001a68;
+	color: #fff;
+	border-color: #000;
+}
+
+.game.backtracking .constraints {
+	background: #db93f5;
+}
+
+@keyframes li {
+	from {
+		height: 0;
+		overflow: hidden;
+		font-size: 0;
+	}
+	to {
+		height: 39px;
+	}
 }
 
