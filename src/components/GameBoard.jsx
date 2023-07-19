@@ -33,6 +33,7 @@ const GameBoard = ({
 									key={colIndex}
 									setFixedBoard={setFixedBoard}
 									stack={stack}
+									availableValues={avaliableValues}
 								/>
 							))}
 						</tr>
@@ -44,4 +45,3 @@ const GameBoard = ({
 };
 
 export default GameBoard;
-

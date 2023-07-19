@@ -6,4 +6,3 @@ export default function getPosition(index) {
 		y: index % NUM_COLS,
 	};
 }
-
