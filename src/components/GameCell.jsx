@@ -51,10 +51,12 @@ const GameCell = ({
 		setEditing(false);
 	};
 
+	const isCurrent = current.x === rowIndex && current.y === colIndex;
+
 	return (
 		<td
 			className={clsx({
-				highlight: current.x === rowIndex && current.y === colIndex,
+				highlight: isCurrent,
 				constraints:
 					constraints[
 						getIndex({
@@ -76,6 +78,7 @@ const GameCell = ({
 					(rowIndex + 1) % SQUARE_SIZE == 0 &&
 					rowIndex + 1 !== NUM_COLS &&
 					'2px solid #000',
+				position: 'relative',
 			}}
 			key={colIndex}
 			onDoubleClick={handleDbClick}
@@ -97,4 +100,3 @@ const GameCell = ({
 };
 
 export default GameCell;
-

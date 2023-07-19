@@ -10,4 +10,3 @@ export default function isFilled(board) {
 	}
 	return true;
 }
-

@@ -18,4 +18,3 @@ export default function getAvailableValues(pos, board, constraints) {
 
 	return __return;
 }
-
