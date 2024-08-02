@@ -11,6 +11,7 @@ const GameBoard = ({
 	backtracking,
 	setFixedBoard,
 	stack,
+	avaliableValues,
 }) => {
 	return (
 		<div
