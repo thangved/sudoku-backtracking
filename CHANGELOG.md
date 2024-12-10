@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0](https://github.com/thangved/sudoku-backtracking/compare/v0.1.0...v1.0.0) (2024-12-10)
+
+
+### Miscellaneous Chores
+
+* release 1.0.0 ([2e8aa3d](https://github.com/thangved/sudoku-backtracking/commit/2e8aa3d50c94e711d4c8b33277c329fa6d5c66f8))
+* release 1.0.0 ([ebd7125](https://github.com/thangved/sudoku-backtracking/commit/ebd71251b2545f72084d14923272c8263f6f06d0))
+
 ## [0.1.0](https://github.com/thangved/sudoku-backtracking/compare/v0.0.0...v0.1.0) (2024-12-10)
 
 ### Features
