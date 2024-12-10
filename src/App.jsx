@@ -8,6 +8,7 @@ import createConstraints from './utils/createConstraints';
 import getAvailableValues from './utils/getAvailableValues';
 import getNextMinDomainCell from './utils/getNextMinDomainCell';
 import isFilled from './utils/isFilled';
+import clsx from 'clsx';
 
 function App() {
 	const [board, setBoard] = useState(createBoard);
@@ -171,7 +172,7 @@ function App() {
 
 	return (
 		<div className='row'>
-			<div className='col'>
+			<div className='col' style={{ height: '100%' }}>
 				<GameBoard
 					board={board}
 					constraints={constraints}
@@ -184,11 +185,28 @@ function App() {
 			</div>
 			<div className='col'>
 				<div className='right'>
+					<div className={clsx('actions')}>
+						<button onClick={handleSolve}>Giải</button>
+						<button onClick={handleReset}>Đặt lại</button>
+						<label htmlFor='speed'>Tốc độ</label>{' '}
+						<input
+							type='range'
+							name=''
+							id='speed'
+							min={100}
+							max={900}
+							value={speed}
+							onChange={(event) =>
+								setSpeed(parseInt(event.target.value))
+							}
+						/>
+						{speed}
+					</div>
 					<ul
 						style={{
-							height: NUM_ROWS * 50,
 							width: '100%',
 							overflowY: 'auto',
+							height: '40vh',
 						}}
 					>
 						{steps
@@ -210,21 +228,6 @@ function App() {
 						))}
 					</div>
 				</div>
-				<button onClick={handleSolve}>Solve</button>
-				<button onClick={handleReset}>Reset</button>
-				<br />
-				<br />
-				<label htmlFor='speed'>Speed</label>{' '}
-				<input
-					type='range'
-					name=''
-					id='speed'
-					min={100}
-					max={900}
-					value={speed}
-					onChange={(event) => setSpeed(parseInt(event.target.value))}
-				/>
-				{speed}
 			</div>
 		</div>
 	);

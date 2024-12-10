@@ -10,20 +10,23 @@
 	flex-wrap: wrap;
 	display: flex;
 	font-family: Arial, Helvetica, sans-serif;
+	min-height: 100vh;
+	gap: 20px;
+	padding: 20px;
+	overflow: hidden;
 }
 
 .col {
-	padding: 10px;
-}
-
-.col:nth-child(2) {
+	overflow: hidden;
 	flex: 1;
 }
 
 .game {
 	border: 2px solid #000;
-	width: fit-content;
 	position: relative;
+	aspect-ratio: 1;
+	height: calc(100vh - 40px);
+	max-width: 100%;
 }
 
 ul {
@@ -65,11 +68,13 @@ ul li {
 
 table {
 	border-collapse: collapse;
+	width: 100%;
+	height: 100%;
 }
 
 td {
-	width: 50px;
-	height: 50px;
+	width: calc(100% / 9);
+	height: calc(100% / 9);
 	border: 1px solid #000;
 	text-align: center;
 	vertical-align: middle;
@@ -134,29 +139,27 @@ button {
 	border-radius: 5px;
 }
 
-button + button {
-	margin-left: 10px;
-}
-
 button:active {
 	background: #000;
 }
 
 .right {
 	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	height: 100%;
+	overflow: hidden;
 }
 
 .stack {
-	width: 450px;
-	height: 450px;
 	border: 1px solid #001a68;
-	border-left: none;
 	right: 10px;
 	top: 10px;
 	bottom: 10px;
 	z-index: 100;
 	background: #fff;
 	overflow-y: auto;
+	height: 40vh;
 }
 
 .stack .stack-item {
@@ -196,4 +199,10 @@ button:active {
 	to {
 		height: 39px;
 	}
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
